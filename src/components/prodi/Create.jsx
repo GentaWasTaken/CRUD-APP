@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function CreateProdi() {
+  const token = localStorage.getItem("authToken");
   const [namaProdi, setNamaProdi] = useState("");
   const [fakultasId, setFakultasId] = useState("");
   const [fakultasList, setFakultasList] = useState([]);
@@ -39,6 +40,11 @@ export default function CreateProdi() {
         {
           nama: namaProdi,
           fakultas_id: fakultasId,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: `application/json`
+          },
         }
       );
       if (response.status === 201) {
